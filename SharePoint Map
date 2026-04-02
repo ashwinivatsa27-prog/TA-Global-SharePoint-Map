@@ -1,14 +1,14 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>Global Representation Map</title>
+  <title>TA Global SharePoint Map</title>
 
   <style>
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background: #ffffff;
     }
 
     svg {
@@ -20,31 +20,18 @@
       fill: #e6e6e6;
       stroke: #ffffff;
       stroke-width: 0.5;
-      cursor: pointer;
     }
 
     .country.active {
-      fill: #2bb673; /* emerald-style highlight */
+      fill: #2bb673;
     }
 
     .country:hover {
       fill: #ffcc00;
     }
-
-    #label {
-      position: absolute;
-      background: white;
-      padding: 6px 10px;
-      border: 1px solid #ccc;
-      font-size: 12px;
-      display: none;
-      pointer-events: none;
-    }
   </style>
 </head>
 <body>
-
-<div id="label"></div>
 
 <svg viewBox="0 0 1000 500"></svg>
 
@@ -52,7 +39,6 @@
 
 <script>
   const svg = d3.select("svg");
-  const label = document.getElementById("label");
 
   const projection = d3.geoNaturalEarth1()
     .scale(160)
@@ -60,7 +46,6 @@
 
   const path = d3.geoPath().projection(projection);
 
-  // Example list of "represented" countries
   const activeCountries = [
     "United Kingdom",
     "France",
@@ -80,18 +65,10 @@
         activeCountries.includes(d.properties.name)
           ? "country active"
           : "country"
-      )
-      .on("mousemove", (event, d) => {
-        label.style.display = "block";
-        label.style.left = event.pageX + 10 + "px";
-        label.style.top = event.pageY + 10 + "px";
-        label.innerText = d.properties.name;
-      })
-      .on("mouseout", () => {
-        label.style.display = "none";
-      });
+      );
   });
 </script>
 
 </body>
 </html>
+
